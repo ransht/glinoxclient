@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="description" content="Add a loading spinner to Datatables without AJAX" />
+    <title>weBazz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+	
+	<style>
+	
+	#containerexample {
+	display: none;
+	}
+	
+	#loadercontainer {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	}
+
+	.rtl {
+
+	direction:rtl;
+	text-align: right;
+	};
+		
+	</style>
+	
+</head>
+<body>
+
+
+  <div id="containerexample" class="m-5">
+	<table id="example" class="rtl table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+        
+<thead>
+   <tr>
+     <th>קוד</th>
+     <th>מקט</th>
+     <th>ברקוד</th>
+     <th>במלאי</th>
+     <th>מותג</th>
+	 <th>תאור</th>
+   </tr>
+</thead>
+
+<tbody>
+  <tr>
+    <td> 5623 </td>
+    <td> 70825990 </td>
+    <td> 4001167825990 </td>
+    <td><input type="checkbox"></td>
+    <td> Baby Born </td>
+	<td> בייבי בורן ראש בובה 27 ס"מ </td>
+  </tr>
+  
+
+ 
+ 
+        </tbody>
+    </table>
+  </div>
+  <div id="loadercontainer">
+  <div class="d-flex justify-content-center text-secondary" id="loader">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+ 
+</body>
+</html>
+<body>
+
+
+</body>
+</html>
+
+<script>
+	$(document).ready(function() {
+	    var table = $('#example').on( 'draw.dt', function () {
+    $("#containerexample").attr("id", "container"); $("#loadercontainer").css("display","none");
+  } ).DataTable( {
+	        lengthChange: false,
+	        buttons: [ 'excel', 'pdf', 'colvis' ],
+            "scrollX": true,
+            "paging": false,
+            "order": [[ 3, "desc" ]]
+	    } );
+	 
+      // var items = [{"offerId":"8","offerSku":"166325","productSku":"5624","quantity":"100","teur":"בובת בייבי בורן אח גדול 43 ס\"מ",
+      // "makt":"4001167826911","mutag":"Baby Born","maktSapac2":"70826911","noSapac2":"200409"}
+      // ,{"offerId":"181","offerSku":"166790","productSku":"5627","quantity":"99","teur":"בובת בייבי בורן מג'יק בת 43 ס\"מ","makt":"4001167827956"
+      // ,"mutag":"Baby Born","maktSapac2":"70827956","noSapac2":"200409"}];
+
+      // fillTable(items);
+
+      var url = `https://glinoxgetprod.azurewebsites.net/api/Function1?token=${localStorage.getItem("token")}` 
+      $.get( {   
+         url:url,
+    dataType:"json",
+     contentType: 'application/json; charset=utf-8'
+    }
+     , function( data ) {
+
+      fillTable(data);
+});
+	    table.buttons().container()
+	        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+
+function fillTable(data){
+      var t = $('#example').DataTable();
+      for (let i = 0; i < data.length; i++) {
+        debugger;
+        t.row.add([data[i].productSku, data[i].makt,data[i].maktSapac2,`<input type='number' value=${data[i].quantity} />` ,data[i].mutag,data[i].teur]).draw(false);
+      }
+}
+
+	} );
+</script>
+
+
+
