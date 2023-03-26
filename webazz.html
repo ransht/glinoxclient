@@ -49,14 +49,6 @@
 </thead>
 
 <tbody>
-  <tr>
-    <td> 5623 </td>
-    <td> 70825990 </td>
-    <td> 4001167825990 </td>
-    <td><input type="checkbox"></td>
-    <td> Baby Born </td>
-	<td> בייבי בורן ראש בובה 27 ס"מ </td>
-  </tr>
   
 
  
@@ -95,11 +87,8 @@
 	    var table = $('#example').on( 'draw.dt', function () {
     $("#containerexample").attr("id", "container"); $("#loadercontainer").css("display","none");
   } ).DataTable( {
-	        lengthChange: false,
-	        buttons: [ 'excel', 'pdf', 'colvis' ],
-            "scrollX": true,
-            "paging": false,
-            "order": [[ 3, "desc" ]]
+            scrollX: true,
+            pagingType: 'full_numbers',
 	    } );
 	 
       // var items = [{"offerId":"8","offerSku":"166325","productSku":"5624","quantity":"100","teur":"בובת בייבי בורן אח גדול 43 ס\"מ",
@@ -124,8 +113,7 @@
 
 function fillTable(data){
       var t = $('#example').DataTable();
-      for (let i = 0; i < 10; i++) {
-        debugger;
+      for (let i = 0; i < data.length; i++) {
         t.row.add([data[i].productSku, data[i].makt,data[i].maktSapac2,`<input type='number' value=${data[i].quantity} />` ,data[i].mutag,data[i].teur]).draw(false);
       }
 }
