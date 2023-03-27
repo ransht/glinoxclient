@@ -42,9 +42,11 @@
      <th>קוד</th>
      <th>מקט</th>
      <th>ברקוד</th>
-     <th>במלאי</th>
      <th>מותג</th>
 	 <th>תאור</th>
+   <th>במלאי</th>
+	 <th>מלאי שופרסל</th>
+	 <th>מלאי סופר פארם</th>
    </tr>
 </thead>
 
@@ -91,12 +93,7 @@
             pagingType: 'full_numbers',
 	    } );
 	 
-      // var items = [{"offerId":"8","offerSku":"166325","productSku":"5624","quantity":"100","teur":"בובת בייבי בורן אח גדול 43 ס\"מ",
-      // "makt":"4001167826911","mutag":"Baby Born","maktSapac2":"70826911","noSapac2":"200409"}
-      // ,{"offerId":"181","offerSku":"166790","productSku":"5627","quantity":"99","teur":"בובת בייבי בורן מג'יק בת 43 ס\"מ","makt":"4001167827956"
-      // ,"mutag":"Baby Born","maktSapac2":"70827956","noSapac2":"200409"}];
 
-      // fillTable(items);
 
       var url = `https://glinoxgetprod.azurewebsites.net/api/Function1?token=${localStorage.getItem("token")}` 
       $.get( {   
@@ -114,7 +111,7 @@
 function fillTable(data){
       var t = $('#example').DataTable();
       for (let i = 0; i < data.length; i++) {
-        t.row.add([data[i].productSku, data[i].makt,data[i].maktSapac2,`<input type='number' value=${data[i].quantity} />` ,data[i].mutag,data[i].teur]).draw(false);
+        t.row.add([data[i].productSku, data[i].makt,data[i].maktSapac2,data[i].mutag,,data[i].teur,`<input type='number' value=${data[i].quantity} />`,data[i].sufersal,data[i].mutag,data[i].superPharm]).draw(false);
       }
 }
 
