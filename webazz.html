@@ -116,10 +116,14 @@ function fillTable(data){
          ,data[i].maktSapac2,
          data[i].mutag,
          data[i].teur,
-         `<input type='number' value=${data[i].quantity} />`,
+         `<input type='number' id='qunatity_${i}' value=${data[i].quantity} /> <button onclick='updateQ(${data[i].productSku},${i})'>עדכן</button>`,
          data[i].sufersal,
          data[i].superPharm]).draw(false);
       }
+}
+
+function updateQ(productSku, index){
+alert(document.getElementById(`qunatity_${index}`).value);
 }
 
 	} );
