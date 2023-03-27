@@ -111,7 +111,7 @@
 function fillTable(data){
       var t = $('#example').DataTable();
       for (let i = 0; i < data.length; i++) {
-        t.row.add([data[i].productSku, data[i].makt,data[i].maktSapac2,data[i].mutag,,data[i].teur,`<input type='number' value=${data[i].quantity} />`,data[i].sufersal,data[i].mutag,data[i].superPharm]).draw(false);
+        t.row.add([data[i].productSku, data[i].makt,data[i].maktSapac2,data[i].mutag,data[i].teur,`<input type='number' value=${data[i].quantity} />`,data[i].sufersal,data[i].mutag,data[i].superPharm]).draw(false);
       }
 }
 
