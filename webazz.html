@@ -109,6 +109,8 @@
         </div>
     </div>
   </div>
+  <div id="snackbar">עודכן</div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -119,7 +121,6 @@
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <div id="snackbar">עודכן</div>
 </body>
 </html>
 <body>
@@ -170,7 +171,6 @@ function fillTable(data){
 
 	} );
   function updateQ(productSku, index){
-alert(document.getElementById(`qunatity_${index}`).value);
 var quantity = document.getElementById(`qunatity_${index}`).value;
 $.post({
     url:`https://glinoxsendoffer.azurewebsites.net/api/Function1?token=${localStorage.getItem("token")}&productSku=${productSku}&quantity=${quantity}`,
